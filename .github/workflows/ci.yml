@@ -86,4 +86,5 @@ jobs:
           ./slsa-verifier-linux-amd64 verify-artifact \
             dist/python_web_app.zip \
             --provenance-path dist/provenance.intoto.jsonl \
-            --source github.com/visgwu/python_web_app
+            --source-uri github.com/visgwu/python_web_app \
+            --source-tag ${{ github.ref_name }}
