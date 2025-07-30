@@ -1,4 +1,4 @@
-name: CI
+name: Build and Generate Provenance
 
 on:
   push:    
@@ -25,12 +25,12 @@ jobs:
 
     - name: Archive web application
       run: |
-        mkdir -p artifact
-        cp -r src requirements.txt artifact/
-        if [ -f Procfile ]; then cp Procfile artifact/; fi
-        if [ -f runtime.txt ]; then cp runtime.txt artifact/; fi
-        cd artifact
-        zip -r ../python-web-app.zip .
+        mkdir -p dist
+        cp -r src requirements.txt dist/
+        if [ -f Procfile ]; then cp Procfile dist/; fi
+        if [ -f runtime.txt ]; then cp runtime.txt dist/; fi
+        cd dist
+        zip -r python_web_app.zip .
         cd ..
 
     - name: Create GitHub Release
@@ -50,5 +50,46 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./python-web-app.zip
-        asset_name: python-web
+        asset_path: ./dist/python_web_app.zip
+        asset_name: python_web_app.zip
+        asset_content_type: application/zip
+
+  provenance:
+    needs: build
+    permissions:
+      id-token: write
+      contents: write
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.8.0
+    with:
+      base64-subjects: false
+      upload-assets: true
+      artifact-path: dist/python_web_app.zip
+      output-path: dist/python_web_app.intoto.jsonl
+
+  verify:
+      needs: provenance
+      runs-on: ubuntu-latest
+      steps:
+        - name: Download build artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: python_web_app.zip
+            path: dist
+
+        - name: Download provenance artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: provenance
+            path: dist
+
+        - name: Download SLSA Verifier
+          run: |
+            curl -LO https://github.com/slsa-framework/slsa-verifier/releases/latest/download/slsa-verifier-linux-amd64
+            chmod +x slsa-verifier-linux-amd64
+
+        - name: Verify SLSA Provenance
+          run: |
+            ./slsa-verifier-linux-amd64 verify-artifact \
+              dist/python_web_app.zip \
+              --provenance dist/python_web_app.intoto.jsonl \
+              --source github.com/visgwu/python_web_app
