@@ -2,15 +2,11 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'   # Triggers on version tags like v1.0.0
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -33,9 +29,27 @@ jobs:
         cp -r src requirements.txt artifact/
         if [ -f Procfile ]; then cp Procfile artifact/; fi
         if [ -f runtime.txt ]; then cp runtime.txt artifact/; fi
+        cd artifact
+        zip -r ../python-web-app.zip .
+        cd ..
 
-    - name: Upload web application artifact
-      uses: actions/upload-artifact@v4
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: python-web-app
-        path: artifact/
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./python-web-app.zip
+        asset_name: python-web-app.zip
+        asset_content_type: application/zip
