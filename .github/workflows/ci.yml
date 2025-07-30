@@ -11,6 +11,8 @@ jobs:
     permissions:
       contents: write
       actions: read
+    outputs:
+      hashes: ${{ steps.hash.outputs.base64 }}
 
     steps:
       - name: Checkout code
@@ -33,6 +35,13 @@ jobs:
           [ -f runtime.txt ] && cp runtime.txt dist/
           cd dist && zip -r python_web_app.zip . && cd ..
 
+      - name: Generate base64-encoded SHA256 hash
+        id: hash
+        run: |
+          cd dist
+          sha256sum python_web_app.zip | base64 -w0 > hash.b64
+          echo "base64=$(cat hash.b64)" >> $GITHUB_OUTPUT
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -40,17 +49,16 @@ jobs:
           path: dist/python_web_app.zip
 
   provenance:
-    needs: build
+    needs: [build]
     permissions:
+      actions: read
       id-token: write
       contents: write
-      actions: read
-    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.10.0
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
     with:
-      base64-subjects: false
+      base64-subjects: "${{ needs.build.outputs.hashes }}"
       upload-assets: true
-      artifact-path: dist/python_web_app.zip
-      output-path: dist/python_web_app.intoto.jsonl    
+      provenance-name: provenance.intoto.jsonl
 
   verify:
     needs: provenance
@@ -68,10 +76,13 @@ jobs:
           name: provenance
           path: dist
 
-      - name: Verify provenance
+      - name: Download SLSA Verifier
         run: |
           curl -LO https://github.com/slsa-framework/slsa-verifier/releases/latest/download/slsa-verifier-linux-amd64
           chmod +x slsa-verifier-linux-amd64
+
+      - name: Verify SLSA Provenance
+        run: |
           ./slsa-verifier-linux-amd64 verify-artifact \
             dist/python_web_app.zip \
             --provenance dist/provenance.intoto.jsonl \
