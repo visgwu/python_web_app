@@ -45,13 +45,18 @@ jobs:
       id-token: write
       contents: write
       actions: read
-    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.10.0
+    with:
+      base64-subjects: false
+      upload-assets: true
+      artifact-path: dist/python_web_app.zip
+      output-path: dist/python_web_app.intoto.jsonl    
 
   verify:
     needs: provenance
     runs-on: ubuntu-latest
     steps:
-      - name: Download build artifact
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: python-web-app
@@ -63,13 +68,10 @@ jobs:
           name: provenance
           path: dist
 
-      - name: Download SLSA Verifier
+      - name: Verify provenance
         run: |
           curl -LO https://github.com/slsa-framework/slsa-verifier/releases/latest/download/slsa-verifier-linux-amd64
           chmod +x slsa-verifier-linux-amd64
-
-      - name: Verify SLSA Provenance
-        run: |
           ./slsa-verifier-linux-amd64 verify-artifact \
             dist/python_web_app.zip \
             --provenance dist/provenance.intoto.jsonl \
