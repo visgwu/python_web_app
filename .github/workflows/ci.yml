@@ -57,6 +57,7 @@ jobs:
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
     with:
       base64-subjects: "${{ needs.build.outputs.hashes }}"
+      upload-assets: false
       provenance-name: provenance.intoto.jsonl
 
   verify:
@@ -84,5 +85,5 @@ jobs:
         run: |
           ./slsa-verifier-linux-amd64 verify-artifact \
             dist/python_web_app.zip \
-            --provenance dist/provenance.intoto.jsonl \
+            --provenance-path dist/provenance.intoto.jsonl \
             --source github.com/visgwu/python_web_app
