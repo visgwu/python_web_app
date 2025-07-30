@@ -51,12 +51,4 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./python-web-app.zip
-        asset_name: python-web-app.zip
-        asset_content_type: application/zip
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deployment Step
-        run: echo "Deployment complete. Visit your release at https://github.com/${{ github.repository }}/releases/latest"
+        asset_name: python-web
