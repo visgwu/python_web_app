@@ -1,69 +1,55 @@
 name: Build and Generate Provenance
 
 on:
-  push:    
+  push:
     tags:
-      - 'v*.*.*'   # Triggers on version tags like v1.0.0
+      - 'v*.*.*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read  # Required to generate provenance later
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Archive web application
-      run: |
-        mkdir -p dist
-        cp -r src requirements.txt dist/
-        if [ -f Procfile ]; then cp Procfile dist/; fi
-        if [ -f runtime.txt ]; then cp runtime.txt dist/; fi
-        cd dist
-        zip -r python_web_app.zip .
-        cd ..
+      - name: Archive web application
+        run: |
+          mkdir -p dist
+          cp -r src requirements.txt dist/
+          [ -f Procfile ] && cp Procfile dist/
+          [ -f runtime.txt ] && cp runtime.txt dist/
+          cd dist && zip -r python_web_app.zip . && cd ..
 
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT }}
-      with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.ref_name }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/python_web_app.zip
-        asset_name: python_web_app.zip
-        asset_content_type: application/zip
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-web-app
+          path: dist/python_web_app.zip
 
   provenance:
     needs: build
     permissions:
       id-token: write
       contents: write
+      actions: read  # 🔥 REQUIRED to access uploaded artifact
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.8.0
     with:
-      artifact-input: dist/python_web_app.zip
-      upload-assets: true
-      base64-subjects: false
+      artifact-name: python-web-app  # this MUST match the upload name
+      provenance-name: provenance.intoto.jsonl
+      upload-assets: false           # true if you want to attach to release
 
   verify:
     needs: provenance
@@ -78,7 +64,7 @@ jobs:
       - name: Download provenance
         uses: actions/download-artifact@v4
         with:
-          name: provenance  # this is the default name used by the generator
+          name: provenance
           path: dist
 
       - name: Download SLSA Verifier
