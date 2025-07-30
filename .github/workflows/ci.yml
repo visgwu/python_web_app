@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: read  # Required to generate provenance later
+      actions: read
 
     steps:
       - name: Checkout code
@@ -44,12 +44,12 @@ jobs:
     permissions:
       id-token: write
       contents: write
-      actions: read  # 🔥 REQUIRED to access uploaded artifact
+      actions: read
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.8.0
     with:
-      artifact-name: python-web-app  # this MUST match the upload name
+      upload-assets: false
+      base64-subjects: false
       provenance-name: provenance.intoto.jsonl
-      upload-assets: false           # true if you want to attach to release
 
   verify:
     needs: provenance
