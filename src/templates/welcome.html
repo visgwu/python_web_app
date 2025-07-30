@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Welcome</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255,255,255,0.85);
+            padding: 2rem 2.5rem;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 7% auto;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+        }
+        form {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        button {
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            border: none;
+            background: #3f51b5;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #283593;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ username }}!</h1>
+        <p>You have successfully logged in.</p>
+        <p>Feel free to explore the application.</p>
+        <form action="{{ url_for('logout') }}" method="get">
+            <button type="submit">Logout</button>
+        </form>
