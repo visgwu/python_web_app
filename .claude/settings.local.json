@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(chmod:*)",
+      "Bash(tree:*)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File .claude/skills/sonarqube/scripts/run_sonar_scan.ps1)",
+      "Bash(pip show:*)",
+      "Bash(pip search:*)",
+      "Bash(python -m pysonar:*)",
+      "Bash(python:*)",
+      "Bash(where:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:bandit.readthedocs.io)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File .claude/skills/bandit/scripts/run_bandit_scan.ps1)",
+      "Bash(start firefox bandit-report.html)"
+    ]
+  }
+}

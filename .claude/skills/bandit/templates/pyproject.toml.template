@@ -1,0 +1,121 @@
+# Bandit Configuration Template (TOML Format)
+# Add this section to your existing pyproject.toml file
+# Run with: bandit -c pyproject.toml -r .
+#
+# Documentation: https://bandit.readthedocs.io/en/latest/config.html
+
+[tool.bandit]
+# Directories to exclude from scanning
+exclude_dirs = [
+    "tests",
+    "test",
+    "venv",
+    "env",
+    ".venv",
+    "__pycache__",
+    ".git",
+    "build",
+    "dist",
+    "node_modules",
+    ".eggs",
+    "*.egg-info"
+]
+
+# Tests to skip (list of test IDs to exclude)
+skips = [
+    "B101",  # assert_used
+    "B601",  # paramiko_calls
+]
+
+# Only run specific tests (if specified, only these will run)
+# Comment out to run all tests except those in skips
+# tests = [
+#     "B201",  # flask_debug_true
+#     "B301",  # pickle
+#     "B302",  # marshal
+#     "B602",  # subprocess_popen_with_shell_equals_true
+# ]
+
+# ============================================================================
+# PLUGIN-SPECIFIC SETTINGS (Advanced)
+# ============================================================================
+
+# Configure the subprocess shell injection detector
+[tool.bandit.any_other_function_with_shell_equals_true]
+no_shell = [
+    "os.execl",
+    "os.execle",
+    "os.execlp",
+    "os.execlpe",
+    "os.execv",
+    "os.execve",
+    "os.execvp",
+    "os.execvpe"
+]
+
+# ============================================================================
+# COMMON CONFIGURATION EXAMPLES
+# ============================================================================
+
+# Example 1: Production-ready strict scanning
+# [tool.bandit]
+# exclude_dirs = ["tests", "venv"]
+# skips = []
+# tests = [
+#     "B201", "B301", "B302", "B303", "B304", "B305", "B307",
+#     "B501", "B502", "B504", "B505", "B506",
+#     "B602", "B603", "B604", "B605", "B608", "B609"
+# ]
+
+# Example 2: Development-friendly (balanced)
+# [tool.bandit]
+# exclude_dirs = ["tests", "test", "venv", "docs"]
+# skips = ["B101", "B110", "B112", "B404", "B603", "B607"]
+
+# Example 3: Web application focus
+# [tool.bandit]
+# exclude_dirs = ["tests", "venv", "migrations"]
+# tests = [
+#     "B201", "B308", "B501", "B506",
+#     "B602", "B604", "B605", "B608", "B609",
+#     "B610", "B611", "B701", "B702", "B703"
+# ]
+
+# Example 4: Cryptography focus
+# [tool.bandit]
+# exclude_dirs = ["tests", "venv"]
+# tests = [
+#     "B303", "B304", "B305", "B324", "B413",
+#     "B501", "B502", "B503", "B504", "B505"
+# ]
+
+# ============================================================================
+# INTEGRATION WITH OTHER TOOLS
+# ============================================================================
+
+# You can include Bandit configuration alongside other Python tools in pyproject.toml
+
+# Example with Black formatter
+# [tool.black]
+# line-length = 88
+# target-version = ['py39']
+
+# Example with pytest
+# [tool.pytest.ini_options]
+# testpaths = ["tests"]
+# python_files = ["test_*.py"]
+
+# Example with mypy
+# [tool.mypy]
+# python_version = "3.9"
+# warn_return_any = true
+# warn_unused_configs = true
+
+# ============================================================================
+# NOTES
+# ============================================================================
+# 1. This configuration must be in a file named "pyproject.toml"
+# 2. Run with: bandit -c pyproject.toml -r .
+# 3. TOML format allows integration with other Python tool configs
+# 4. Requires bandit[toml] to be installed: pip install bandit[toml]
+# 5. Test IDs can be found in REFERENCE.md or via: bandit -l

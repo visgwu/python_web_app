@@ -1,0 +1,2419 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">121536</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\flask\cli.py" target="_blank">.\.venv\Lib\site-packages\flask\cli.py</a><br>
+    <b>Line number: </b>963<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+962	        with open(startup) as f:
+963	            eval(compile(f.read(), startup, &quot;exec&quot;), ctx)
+964	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\flask\config.py" target="_blank">.\.venv\Lib\site-packages\flask\config.py</a><br>
+    <b>Line number: </b>185<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+184	            with open(filename, mode=&quot;rb&quot;) as config_file:
+185	                exec(compile(config_file.read(), filename, &quot;exec&quot;), d.__dict__)
+186	        except OSError as e:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\flask\json\tag.py" target="_blank">.\.venv\Lib\site-packages\flask\json\tag.py</a><br>
+    <b>Line number: </b>185<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+184	    def to_python(self, value: t.Any) -&gt; t.Any:
+185	        return Markup(value)
+186	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\gunicorn\util.py" target="_blank">.\.venv\Lib\site-packages\gunicorn\util.py</a><br>
+    <b>Line number: </b>247<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+246	    elif netloc == &quot;&quot;:
+247	        host, port = &quot;0.0.0.0&quot;, default_port
+248	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\itsdangerous\signer.py" target="_blank">.\.venv\Lib\site-packages\itsdangerous\signer.py</a><br>
+    <b>Line number: </b>45<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+44	    &quot;&quot;&quot;
+45	    return hashlib.sha1(string)
+46	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\bccache.py" target="_blank">.\.venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>73<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+72	        # the source code of the file changed, we need to reload
+73	        checksum = pickle.load(f)
+74	        if self.checksum != checksum:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Deserialization with the marshal module is possibly dangerous.<br>
+    <b>Test ID:</b> B302<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\bccache.py" target="_blank">.\.venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>79<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b302-marshal" target="_blank">https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b302-marshal</a><br>
+
+<div class="code">
+<pre>
+78	        try:
+79	            self.code = marshal.load(f)
+80	        except (EOFError, ValueError, TypeError):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\bccache.py" target="_blank">.\.venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>156<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+155	        &quot;&quot;&quot;Returns the unique hash key for this template name.&quot;&quot;&quot;
+156	        hash = sha1(name.encode(&quot;utf-8&quot;))
+157	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\bccache.py" target="_blank">.\.venv\Lib\site-packages\jinja2\bccache.py</a><br>
+    <b>Line number: </b>165<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+164	        &quot;&quot;&quot;Returns a checksum for the source.&quot;&quot;&quot;
+165	        return sha1(source.encode(&quot;utf-8&quot;)).hexdigest()
+166	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\debug.py" target="_blank">.\.venv\Lib\site-packages\jinja2\debug.py</a><br>
+    <b>Line number: </b>145<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+144	    try:
+145	        exec(code, globals, locals)
+146	    except BaseException:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\environment.py" target="_blank">.\.venv\Lib\site-packages\jinja2\environment.py</a><br>
+    <b>Line number: </b>1228<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+1227	        namespace = {&quot;environment&quot;: environment, &quot;__file__&quot;: code.co_filename}
+1228	        exec(code, namespace)
+1229	        rv = cls._from_namespace(environment, namespace, globals)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\environment.py" target="_blank">.\.venv\Lib\site-packages\jinja2\environment.py</a><br>
+    <b>Line number: </b>1544<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1543	    def __html__(self) -&gt; Markup:
+1544	        return Markup(concat(self._body_stream))
+1545	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\ext.py" target="_blank">.\.venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>176<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+175	        if __context.eval_ctx.autoescape:
+176	            rv = Markup(rv)
+177	        # Always treat as a format string, even if there are no
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\ext.py" target="_blank">.\.venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>197<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+196	        if __context.eval_ctx.autoescape:
+197	            rv = Markup(rv)
+198	        # Always treat as a format string, see gettext comment above.
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\ext.py" target="_blank">.\.venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>213<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+212	        if __context.eval_ctx.autoescape:
+213	            rv = Markup(rv)
+214	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\ext.py" target="_blank">.\.venv\Lib\site-packages\jinja2\ext.py</a><br>
+    <b>Line number: </b>238<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+237	        if __context.eval_ctx.autoescape:
+238	            rv = Markup(rv)
+239	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\filters.py" target="_blank">.\.venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>316<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+315	    if eval_ctx.autoescape:
+316	        rv = Markup(rv)
+317	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\filters.py" target="_blank">.\.venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>820<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+819	    if eval_ctx.autoescape:
+820	        rv = Markup(rv)
+821	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\filters.py" target="_blank">.\.venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>851<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+850	    if isinstance(s, Markup):
+851	        indention = Markup(indention)
+852	        newline = Markup(newline)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\filters.py" target="_blank">.\.venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>852<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+851	        indention = Markup(indention)
+852	        newline = Markup(newline)
+853	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\filters.py" target="_blank">.\.venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>1056<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1055	
+1056	    return Markup(str(value)).striptags()
+1057	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\filters.py" target="_blank">.\.venv\Lib\site-packages\jinja2\filters.py</a><br>
+    <b>Line number: </b>1377<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1376	    &quot;&quot;&quot;
+1377	    return Markup(value)
+1378	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\loaders.py" target="_blank">.\.venv\Lib\site-packages\jinja2\loaders.py</a><br>
+    <b>Line number: </b>661<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+660	    def get_template_key(name: str) -&gt; str:
+661	        return &quot;tmpl_&quot; + sha1(name.encode(&quot;utf-8&quot;)).hexdigest()
+662	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\nodes.py" target="_blank">.\.venv\Lib\site-packages\jinja2\nodes.py</a><br>
+    <b>Line number: </b>619<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+618	        if eval_ctx.autoescape:
+619	            return Markup(self.data)
+620	        return self.data
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\nodes.py" target="_blank">.\.venv\Lib\site-packages\jinja2\nodes.py</a><br>
+    <b>Line number: </b>1091<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1090	        eval_ctx = get_eval_context(self, eval_ctx)
+1091	        return Markup(self.expr.as_const(eval_ctx))
+1092	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\nodes.py" target="_blank">.\.venv\Lib\site-packages\jinja2\nodes.py</a><br>
+    <b>Line number: </b>1112<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+1111	        if eval_ctx.autoescape:
+1112	            return Markup(expr)
+1113	        return expr
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\runtime.py" target="_blank">.\.venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>375<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+374	        if self._context.eval_ctx.autoescape:
+375	            return Markup(rv)
+376	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\runtime.py" target="_blank">.\.venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>389<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+388	        if self._context.eval_ctx.autoescape:
+389	            return Markup(rv)
+390	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\runtime.py" target="_blank">.\.venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>776<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+775	        if autoescape:
+776	            return Markup(rv)
+777	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\runtime.py" target="_blank">.\.venv\Lib\site-packages\jinja2\runtime.py</a><br>
+    <b>Line number: </b>787<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+786	        if autoescape:
+787	            rv = Markup(rv)
+788	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\utils.py" target="_blank">.\.venv\Lib\site-packages\jinja2\utils.py</a><br>
+    <b>Line number: </b>403<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+402	        return &quot;\n\n&quot;.join(result)
+403	    return markupsafe.Markup(
+404	        &quot;\n&quot;.join(f&quot;&lt;p&gt;{markupsafe.escape(x)}&lt;/p&gt;&quot; for x in result)
+405	    )
+406	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-medium">
+    <b>markupsafe_markup_xss: </b> Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data.<br>
+    <b>Test ID:</b> B704<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/79.html" target="_blank">CWE-79</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jinja2\utils.py" target="_blank">.\.venv\Lib\site-packages\jinja2\utils.py</a><br>
+    <b>Line number: </b>668<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b704_markupsafe_markup_xss.html</a><br>
+
+<div class="code">
+<pre>
+667	
+668	    return markupsafe.Markup(
+669	        dumps(obj, **kwargs)
+670	        .replace(&quot;&lt;&quot;, &quot;\\u003c&quot;)
+671	        .replace(&quot;&gt;&quot;, &quot;\\u003e&quot;)
+672	        .replace(&quot;&amp;&quot;, &quot;\\u0026&quot;)
+673	        .replace(&quot;&#x27;&quot;, &quot;\\u0027&quot;)
+674	    )
+675	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-32">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\jproperties.py" target="_blank">.\.venv\Lib\site-packages\jproperties.py</a><br>
+    <b>Line number: </b>558<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+557	            # \r, \n, \t or \f.
+558	            return eval(r&quot;u&#x27;\%s&#x27;&quot; % escaped_char)
+559	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-33">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Use of possibly insecure function - consider using safer ast.literal_eval.<br>
+    <b>Test ID:</b> B307<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\packaging\licenses\__init__.py" target="_blank">.\.venv\Lib\site-packages\packaging\licenses\__init__.py</a><br>
+    <b>Line number: </b>100<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval" target="_blank">https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b307-eval</a><br>
+
+<div class="code">
+<pre>
+99	    try:
+100	        invalid = eval(python_expression, globals(), locals())
+101	    except Exception:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-34">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\fake_filesystem.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\fake_filesystem.py</a><br>
+    <b>Line number: </b>3253<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+3252	            return os.path.expanduser(r&quot;~\AppData\Local\Temp&quot;)
+3253	        return &quot;/tmp&quot;
+3254	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-35">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\fake_filesystem.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\fake_filesystem.py</a><br>
+    <b>Line number: </b>3261<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+3260	            self.create_dir(temp_dir)
+3261	        if sys.platform != &quot;win32&quot; and not self.exists(&quot;/tmp&quot;):
+3262	            # under Posix, we also create a link in /tmp if the path does not exist
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-36">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\fake_filesystem.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\fake_filesystem.py</a><br>
+    <b>Line number: </b>3263<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+3262	            # under Posix, we also create a link in /tmp if the path does not exist
+3263	            self.create_symlink(&quot;/tmp&quot;, temp_dir)
+3264	            # reset the used size to 0 to avoid having the link size counted
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-37">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o555 on file (dir1_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>72<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+71	        self.create_dir(dir1_path)
+72	        self.os.chmod(dir1_path, 0o555)  # remove write permissions
+73	        self.create_dir(dir2_path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-38">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (file_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>115<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+114	        self.assertTrue(os.path.exists(file_path))
+115	        self.os.chmod(file_path, 0o666)
+116	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-39">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o555 on file (dir_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>124<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+123	        self.create_file(file_path)
+124	        self.os.chmod(dir_path, 0o555)
+125	        if not is_root():
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-40">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (dir_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>129<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+128	            self.assertTrue(os.path.exists(file_path))
+129	            self.os.chmod(dir_path, 0o777)
+130	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-41">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o750 on file (src_file).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>208<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+207	        self.create_file(src_file)
+208	        os.chmod(src_file, 0o750)
+209	        self.assertTrue(os.path.exists(src_file))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-42">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o750 on file (src_file).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>241<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+240	        self.create_dir(parent_directory)
+241	        os.chmod(src_file, 0o750)
+242	        self.assertTrue(os.path.exists(src_file))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-43">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o750 on file (src_file).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>252<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+251	        self.create_file(src_file)
+252	        os.chmod(src_file, 0o750)
+253	        dst_file = self.make_path(&quot;xyzzy_copy&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-44">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o750 on file (src_file).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>279<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+278	        self.create_file(src_file)
+279	        os.chmod(src_file, 0o750)
+280	        dst_file = self.make_path(&quot;xyzzy_copy&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-45">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o750 on file (src_file).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>297<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+296	        self.create_dir(parent_directory)
+297	        os.chmod(src_file, 0o750)
+298	        self.assertTrue(os.path.exists(src_file))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-46">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (dst_file).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>500<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+499	
+500	        os.chmod(dst_file, 0o666)
+501	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-47">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o555 on file (dst_dir).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_shutil_test.py</a><br>
+    <b>Line number: </b>511<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+510	        self.create_dir(dst_dir)
+511	        os.chmod(dst_dir, 0o555)
+512	        self.assertTrue(os.path.exists(src_file))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-48">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.<br>
+    <b>Test ID:</b> B301<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/502.html" target="_blank">CWE-502</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_test.py</a><br>
+    <b>Line number: </b>718<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b301-pickle" target="_blank">https://bandit.readthedocs.io/en/1.9.2/blacklists/blacklist_calls.html#b301-pickle</a><br>
+
+<div class="code">
+<pre>
+717	        p = pickle.dumps(self.filesystem)
+718	        fs = pickle.loads(p)
+719	        self.assertEqual(str(fs.root), str(self.filesystem.root))
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-49">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_tmp_directory: </b> Probable insecure usage of temp file/directory.<br>
+    <b>Test ID:</b> B108<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/377.html" target="_blank">CWE-377</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_unittest_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_unittest_test.py</a><br>
+    <b>Line number: </b>740<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b108_hardcoded_tmp_directory.html</a><br>
+
+<div class="code">
+<pre>
+739	        # directory or link under Linux, link under macOS
+740	        self.assertTrue(os.path.exists(&quot;/tmp&quot;))
+741	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-50">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o755 on file (/).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_unittest_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_unittest_test.py</a><br>
+    <b>Line number: </b>1015<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+1014	        os.chown(&quot;/&quot;, 0, 0)
+1015	        os.chmod(&quot;/&quot;, 0b111_101_101)
+1016	        with tempfile.TemporaryFile(&quot;wb&quot;) as f:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-51">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (real_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_vs_real_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_vs_real_test.py</a><br>
+    <b>Line number: </b>752<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+751	                real_path, fake_path = self._paths(path)
+752	                os.chmod(real_path, 0o777)
+753	                self.fake_os.chmod(fake_path, 0o777)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-52">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (fake_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_vs_real_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_filesystem_vs_real_test.py</a><br>
+    <b>Line number: </b>753<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+752	                os.chmod(real_path, 0o777)
+753	                self.fake_os.chmod(fake_path, 0o777)
+754	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-53">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o655 on file (file_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>252<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+251	            assert f.read() == &quot;hey&quot;
+252	        self.os.chmod(file_path, 0o655)
+253	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-54">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o655 on file (file_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>274<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+273	        out.close()  # Okay: The file is already closed
+274	        self.os.chmod(file_path, 0o655)
+275	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-55">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>910<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+909	        self.assert_raises_os_error(errno.EACCES, self.os.remove, path)
+910	        self.os.chmod(path, 0o666)
+911	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-56">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (parent_dir).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>925<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+924	        self.create_file(path)
+925	        self.os.chmod(parent_dir, 0o666)  # missing execute permission
+926	        if not is_root():
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-57">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o555 on file (parent_dir).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>932<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+931	            self.create_file(path)
+932	        self.os.chmod(parent_dir, 0o555)  # missing write permission
+933	        if not is_root():
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-58">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o333 on file (parent_dir).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>939<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+938	            self.create_file(path)
+939	        self.os.chmod(parent_dir, 0o333)
+940	        self.os.remove(path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-59">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o222 on file (old_file_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>1459<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+1458	        self.os.chown(old_file_path, 200, 200)
+1459	        self.os.chmod(old_file_path, 0o222)
+1460	        self.create_file(new_file_path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-60">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2075<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2074	        # actual tests
+2075	        self.os.chmod(path, 0o6543)
+2076	        st = self.os.stat(path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-61">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (filedes).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2096<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2095	            # fchmod should work the same way
+2096	            self.os.fchmod(f.filedes, 0o666)
+2097	            st = self.os.stat(path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-62">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (NOT PARSED).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2110<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2109	            with self.assertRaises(TypeError):
+2110	                self.os.chmod(f.fileno(), 0o666)
+2111	            with self.assertRaises(AttributeError):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-63">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (NOT PARSED).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2112<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2111	            with self.assertRaises(AttributeError):
+2112	                self.os.fchmod(f.fileno(), 0o666)
+2113	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-64">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (link_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2120<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2119	        self.create_symlink(link_path, path)
+2120	        self.os.chmod(link_path, 0o6543)
+2121	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-65">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (link_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2139<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2138	            with self.assertRaises(NotImplementedError):
+2139	                self.os.chmod(link_path, 0o6543, follow_symlinks=False)
+2140	        else:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-66">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (link_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2141<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2140	        else:
+2141	            self.os.chmod(link_path, 0o6543, follow_symlinks=False)
+2142	            st = self.os.stat(link_path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-67">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (link_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2157<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2156	        self.create_symlink(link_path, path)
+2157	        self.os.lchmod(link_path, 0o6543)
+2158	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-68">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o1434 on file (path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2171<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2170	        # actual tests
+2171	        self.os.chmod(path, 0o1434)
+2172	        st = self.os.stat(path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-69">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>2184<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+2183	            # Use try-catch to check exception attributes.
+2184	            self.os.chmod(path, 0o777)
+2185	            self.fail(&quot;Exception is expected.&quot;)  # COV_NF_LINE
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-70">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o655 on file (directory).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>3159<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+3158	        self.create_file(file_path, contents=&quot;hey&quot;, perm=0o777)
+3159	        self.os.chmod(directory, 0o655)  # rw-r-xr-x
+3160	        # We cannot create any files in the directory, because that requires
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-71">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o355 on file (directory).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>3185<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+3184	        self.create_file(file_path, contents=&quot;hey&quot;, perm=0o777)
+3185	        self.os.chmod(directory, 0o355)  # -wxr-xr-x
+3186	        another_file = self.make_path(&quot;file.txt&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-72">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (NOT PARSED).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>4024<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+4023	        # actual tests
+4024	        self.os.chmod(path.upper(), 0o6543)
+4025	        st = self.os.stat(path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-73">
+<div class="issue-block issue-sev-medium">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o765 on file (file_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>4103<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+4102	            # tests
+4103	            self.os.chmod(file_path, 0o765)
+4104	            st = self.os.stat(file_path)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-74">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (file_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>4413<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+4412	        self.os.close(file_des)
+4413	        self.os.chmod(file_path, 0o666)
+4414	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-75">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o6543 on file (fname).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>4963<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+4962	        def os_chmod():
+4963	            self.os.chmod(self.fname, 0o6543, dir_fd=self.dir_fd)
+4964	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-76">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (dir_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_os_test.py</a><br>
+    <b>Line number: </b>5778<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+5777	    def test_chmod_unreadable_dir(self):
+5778	        self.chmod(self.dir_path, 0o666)
+5779	        self.assertEqual(0o666, self.os.stat(self.dir_path).st_mode &amp; 0o666)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-77">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o666 on file (NOT PARSED).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\fake_pathlib_test.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\fake_pathlib_test.py</a><br>
+    <b>Line number: </b>1197<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+1196	        self.assertEqual(stat.S_IMODE(0o444), stat.S_IMODE(self.os.stat(path).st_mode))
+1197	        self.os.chmod(self.path(path), 0o666)
+1198	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-78">
+<div class="issue-block issue-sev-high">
+    <b>set_bad_file_permissions: </b> Chmod setting a permissive mask 0o777 on file (existing_path).<br>
+    <b>Test ID:</b> B103<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/732.html" target="_blank">CWE-732</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pyfakefs\tests\test_utils.py" target="_blank">.\.venv\Lib\site-packages\pyfakefs\tests\test_utils.py</a><br>
+    <b>Line number: </b>312<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b103_set_bad_file_permissions.html</a><br>
+
+<div class="code">
+<pre>
+311	            self.os.mkdir(existing_path)
+312	            self.os.chmod(existing_path, 0o777)
+313	        if apply_umask:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-79">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>215<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+214	        try:
+215	            res = requests.get(f&quot;{self.base_urls.api_base_url}/analysis/version&quot;, auth=self.auth)
+216	            if res.status_code != 200:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-80">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>217<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+216	            if res.status_code != 200:
+217	                res = requests.get(f&quot;{self.base_urls.base_url}/api/server/version&quot;, auth=self.auth)
+218	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-81">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>226<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+225	        try:
+226	            res = requests.get(f&quot;{self.base_urls.api_base_url}/analysis/engine&quot;, headers=ACCEPT_JSON, auth=self.auth)
+227	            res.raise_for_status()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-82">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>243<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+242	        try:
+243	            res = requests.get(
+244	                f&quot;{self.base_urls.api_base_url}/analysis/engine&quot;,
+245	                headers=ACCEPT_OCTET_STREAM,
+246	                auth=self.auth,
+247	            )
+248	            self.__download_file(res, handle)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-83">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>255<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+254	            params = {&quot;os&quot;: os, &quot;arch&quot;: arch}
+255	            res = requests.get(
+256	                f&quot;{self.base_urls.api_base_url}/analysis/jres&quot;,
+257	                auth=self.auth,
+258	                headers=ACCEPT_JSON,
+259	                params=params,
+260	            )
+261	            res.raise_for_status()
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-84">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>274<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+273	        try:
+274	            res = requests.get(
+275	                f&quot;{self.base_urls.api_base_url}/analysis/jres/{id}&quot;,
+276	                headers=ACCEPT_OCTET_STREAM,
+277	                auth=self.auth,
+278	            )
+279	            self.__download_file(res, handle)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-85">
+<div class="issue-block issue-sev-medium">
+    <b>request_without_timeout: </b> Call to requests without timeout<br>
+    <b>Test ID:</b> B113<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>LOW<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/400.html" target="_blank">CWE-400</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\api.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\api.py</a><br>
+    <b>Line number: </b>289<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b113_request_without_timeout.html</a><br>
+
+<div class="code">
+<pre>
+288	        try:
+289	            res = requests.get(
+290	                url,
+291	                headers=ACCEPT_OCTET_STREAM,
+292	            )
+293	            self.__download_file(res, handle)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-86">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\jre.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\jre.py</a><br>
+    <b>Line number: </b>136<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+135	            with zipfile.ZipFile(file_path, &quot;r&quot;) as zip_ref:
+136	                zip_ref.extractall(unzip_dir)
+137	        elif file_path.suffix in [&quot;.gz&quot;, &quot;.tgz&quot;]:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-87">
+<div class="issue-block issue-sev-high">
+    <b>tarfile_unsafe_members: </b> tarfile.extractall used without any validation. Please check and discard dangerous members.<br>
+    <b>Test ID:</b> B202<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/22.html" target="_blank">CWE-22</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\pysonar_scanner\utils.py" target="_blank">.\.venv\Lib\site-packages\pysonar_scanner\utils.py</a><br>
+    <b>Line number: </b>101<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b202_tarfile_unsafe_members.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b202_tarfile_unsafe_members.html</a><br>
+
+<div class="code">
+<pre>
+100	        else:
+101	            tar_ref.extractall(target_dir)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-88">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak MD5 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\requests\auth.py" target="_blank">.\.venv\Lib\site-packages\requests\auth.py</a><br>
+    <b>Line number: </b>148<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+147	                    x = x.encode(&quot;utf-8&quot;)
+148	                return hashlib.md5(x).hexdigest()
+149	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-89">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\requests\auth.py" target="_blank">.\.venv\Lib\site-packages\requests\auth.py</a><br>
+    <b>Line number: </b>156<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+155	                    x = x.encode(&quot;utf-8&quot;)
+156	                return hashlib.sha1(x).hexdigest()
+157	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-90">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\requests\auth.py" target="_blank">.\.venv\Lib\site-packages\requests\auth.py</a><br>
+    <b>Line number: </b>205<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+204	
+205	        cnonce = hashlib.sha1(s).hexdigest()[:16]
+206	        if _algorithm == &quot;MD5-SESS&quot;:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-91">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\six.py" target="_blank">.\.venv\Lib\site-packages\six.py</a><br>
+    <b>Line number: </b>740<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+739	            _locs_ = _globs_
+740	        exec(&quot;&quot;&quot;exec _code_ in _globs_, _locs_&quot;&quot;&quot;)
+741	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-92">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\debug\__init__.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\debug\__init__.py</a><br>
+    <b>Line number: </b>41<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+40	def hash_pin(pin: str) -&gt; str:
+41	    return hashlib.sha1(f&quot;{pin} added salt&quot;.encode(&quot;utf-8&quot;, &quot;replace&quot;)).hexdigest()[:12]
+42	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-93">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\debug\__init__.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\debug\__init__.py</a><br>
+    <b>Line number: </b>190<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+189	
+190	    h = hashlib.sha1()
+191	    for bit in chain(probably_public_bits, private_bits):
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-94">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\debug\console.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\debug\console.py</a><br>
+    <b>Line number: </b>180<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+179	        try:
+180	            exec(code, self.locals)
+181	        except Exception:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-95">
+<div class="issue-block issue-sev-high">
+    <b>hashlib: </b> Use of weak SHA1 hash for security. Consider usedforsecurity=False<br>
+    <b>Test ID:</b> B324<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/327.html" target="_blank">CWE-327</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\http.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\http.py</a><br>
+    <b>Line number: </b>928<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b324_hashlib.html</a><br>
+
+<div class="code">
+<pre>
+927	    &quot;&quot;&quot;
+928	    return sha1(data).hexdigest()
+929	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-96">
+<div class="issue-block issue-sev-medium">
+    <b>exec_used: </b> Use of exec detected.<br>
+    <b>Test ID:</b> B102<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\routing\rules.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\routing\rules.py</a><br>
+    <b>Line number: </b>713<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b102_exec_used.html</a><br>
+
+<div class="code">
+<pre>
+712	        locs: t.Dict[str, t.Any] = {}
+713	        exec(code, globs, locs)
+714	        return locs[name]  # type: ignore
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-97">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\serving.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\serving.py</a><br>
+    <b>Line number: </b>795<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+794	
+795	            if self.host in {&quot;0.0.0.0&quot;, &quot;::&quot;}:
+796	                messages.append(f&quot; * Running on all addresses ({self.host})&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-98">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href=".\.venv\Lib\site-packages\werkzeug\serving.py" target="_blank">.\.venv\Lib\site-packages\werkzeug\serving.py</a><br>
+    <b>Line number: </b>798<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+797	
+798	                if self.host == &quot;0.0.0.0&quot;:
+799	                    localhost = &quot;127.0.0.1&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-99">
+<div class="issue-block issue-sev-medium">
+    <b>hardcoded_bind_all_interfaces: </b> Possible binding to all interfaces.<br>
+    <b>Test ID:</b> B104<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>MEDIUM<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/605.html" target="_blank">CWE-605</a><br>
+    <b>File: </b><a href=".\src\app.py" target="_blank">.\src\app.py</a><br>
+    <b>Line number: </b>41<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html" target="_blank">https://bandit.readthedocs.io/en/1.9.2/plugins/b104_hardcoded_bind_all_interfaces.html</a><br>
+
+<div class="code">
+<pre>
+40	    port = int(os.environ.get(&quot;PORT&quot;, 5000))
+41	    app.run(host=&quot;0.0.0.0&quot;, port=port)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

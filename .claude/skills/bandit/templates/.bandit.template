@@ -1,0 +1,89 @@
+# Bandit Configuration Template (INI Format)
+# Copy this file to your project root as ".bandit" to customize Bandit behavior
+#
+# Documentation: https://bandit.readthedocs.io/en/latest/config.html
+
+[bandit]
+
+# Paths to exclude from scanning (comma-separated)
+# Common exclusions: test directories, virtual environments, cache directories
+exclude = /tests,/test,/venv,/env,/.venv,/__pycache__,/.git,/build,/dist,/node_modules
+
+# Directories to exclude (alternative to exclude)
+# exclude_dirs = tests,venv,__pycache__
+
+# Tests to skip (comma-separated test IDs)
+# Use this to suppress false positives or tests not relevant to your project
+# See REFERENCE.md for complete list of test IDs
+skips = B101,B601
+
+# Only run specific tests (if specified, only these tests will run)
+# Useful for focusing on specific security concerns
+# tests = B201,B301,B602
+
+# Number of context lines to show in reports
+# Default is 3, increase for more context
+number = 3
+
+# Aggregate output by:
+# - file: Group issues by filename
+# - vuln: Group issues by vulnerability type
+# aggregate = file
+
+# Severity level threshold
+# Options: low, medium, high
+# Only issues at or above this level will be reported
+# level = medium
+
+# Confidence level threshold
+# Options: low, medium, high
+# Only issues at or above this confidence will be reported
+# confidence = medium
+
+# ============================================================================
+# COMMON CONFIGURATION EXAMPLES
+# ============================================================================
+
+# Example 1: Strict security scanning (production-ready)
+# exclude = /tests,/venv
+# skips =
+# tests = B201,B301,B302,B303,B304,B305,B307,B308,B501,B502,B504,B505,B506,B602,B603,B604,B605,B608,B609
+
+# Example 2: Development-friendly (fewer false positives)
+# exclude = /tests,/venv,/docs
+# skips = B101,B110,B112,B404,B603,B607
+# number = 5
+
+# Example 3: Focus on injection vulnerabilities only
+# exclude = /tests,/venv
+# tests = B602,B604,B605,B608,B609
+# number = 5
+
+# Example 4: Cryptography focus
+# exclude = /tests,/venv
+# tests = B303,B304,B305,B324,B413,B501,B502,B503,B504,B505
+
+# ============================================================================
+# PLUGIN-SPECIFIC SETTINGS
+# ============================================================================
+
+# Configure specific plugins (advanced usage)
+# These settings modify behavior of individual security tests
+
+# Example: Configure shell injection detector
+# [shell_injection]
+# no_shell = os.execl,os.execle,os.execlp
+
+# Example: Configure subprocess module checks
+# [subprocess]
+# no_shell = Popen,call,check_call,check_output
+
+# ============================================================================
+# NOTES
+# ============================================================================
+
+# 1. This file is automatically discovered when using `bandit -r` in the same directory
+# 2. Use `bandit --ini <path>` to specify a custom config file location
+# 3. For YAML or TOML format, see the templates in this directory
+# 4. Test your configuration with: bandit -r . -v (verbose mode)
+# 5. See REFERENCE.md for complete documentation on all options

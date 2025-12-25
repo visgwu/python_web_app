@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from src.auth import verify_credentials
+from auth import verify_credentials
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this to a random secret key
